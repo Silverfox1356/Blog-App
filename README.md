@@ -49,18 +49,6 @@ npm start
 
 Open `http://localhost:3000` in your browser to use the application.
 
-## Testing
-
-Inside the `client` directory you can run the React tests:
-```bash
-npm test
-```
-
-## Project structure
-
-- `api/` – Express server and Mongoose models
-- `client/` – React application (Create React App + Tailwind)
-- `api/uploads/` – Uploaded images served from `/uploads`
 
 ## Features
 
