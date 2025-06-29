@@ -34,7 +34,7 @@ JWT_SECRET=<any secret string>
 
 Start the API and the React client in separate terminals.
 
-### Backend (http://localhost:4000)
+### Backend (http://localhost:5000)
 ```bash
 npx nodemon api/index.js
 # or
