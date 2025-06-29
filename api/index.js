@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 const mongoose = require("mongoose");
 const User = require('./models/User');
 const Post = require('./models/Post');
@@ -10,7 +11,7 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
-require('dotenv').config();
+
 const mongouri=process.env.MONGO_URI;
 const secret=process.env.JWT_SECRET;
 
@@ -21,7 +22,18 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect(mongouri);
+// DEBUG: log the raw URI
+console.log('🔍 [DEBUG] MONGO_URI:', mongouri);
+
+// DEBUG: extract and log what the driver sees as the SRV host
+const srvHost = mongouri.split('@')[1].split('/')[0];
+console.log('🔍 [DEBUG] SRV host segment:', srvHost, '→ labels:', srvHost.split('.'));
+
+
+mongoose.connect(mongouri,{
+  useNewUrlParser:    true,
+  useUnifiedTopology: true,
+});
 
 app.post('/register', async (req,res) => {
   const {username,password} = req.body;
